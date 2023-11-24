@@ -23,6 +23,8 @@ contract MyBot is FunctionsClient, ConfirmedOwner {
     bytes public s_lastResponse;
     bytes public s_lastError;
 
+    uint256 public price;
+
     // Custom error type
     error UnexpectedRequestID(bytes32 requestId);
 
@@ -77,7 +79,7 @@ contract MyBot is FunctionsClient, ConfirmedOwner {
     function sendRequest(
         uint64 subscriptionId,
         string[] calldata args
-    ) external onlyOwner returns (bytes32 requestId) {
+    ) external returns (bytes32 requestId) {
         FunctionsRequest.Request memory req;
         req.initializeRequestForInlineJavaScript(source); // Initialize the request with JS code
         if (args.length > 0) req.setArgs(args); // Set the arguments for the request
@@ -91,6 +93,18 @@ contract MyBot is FunctionsClient, ConfirmedOwner {
         );
 
         return s_lastRequestId;
+    }
+
+    function setPrice(uint256 _price) external onlyOwner {
+        price = _price;
+    } 
+
+    function getPrice() public view returns (uint256) {
+        return price;
+    }
+
+    function getResult() public pure returns (string memory) {
+        return "response";
     }
 
     /**
@@ -115,4 +129,6 @@ contract MyBot is FunctionsClient, ConfirmedOwner {
         // Emit an event to log the response
         emit Response(requestId, character, s_lastResponse, s_lastError);
     }
+
+    function setSource(string calldata src) public {}
 }

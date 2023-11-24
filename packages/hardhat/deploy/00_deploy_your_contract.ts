@@ -24,7 +24,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   await deploy("MyNFT", {
     from: deployer,
     // Contract constructor arguments
-    args: ["0x0a998E04c77120db560727Bb2d6C835b1Bb64098"],
+    args: ["0x0a998E04c77120db560727Bb2d6C835b1Bb64098", "0x1BBBA32f6fbF8dCa96fb033482371A0966517813", "0x4c9CE86AbB947D70C76134950fBAA273A2A4C7F8", 100],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.

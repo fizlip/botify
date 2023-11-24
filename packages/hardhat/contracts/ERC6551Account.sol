@@ -14,32 +14,24 @@ import "./interfaces/IERC6551Account.sol";
 import "./lib/MinimalReceiver.sol";
 import "./lib/ERC6551AccountLib.sol";
 
+import {ERC6551Registry} from "./ERC6551Registry.sol";
+import {MyBot} from "./MyBot.sol";
+
+
 contract ERC6551Account is IERC165, IERC1271, IERC6551Account {
     uint256 public nonce;
+    address public botAddress;
 
     receive() external payable {}
 
+    function initBot(address _botAddress) public{
+        botAddress = _botAddress;
+    }
 
-    function executeFunction(
-        address to, 
-        uint256 value, 
-        uint subscriptionId, 
-        string[] memory args
-    ) external payable returns (bytes memory result) {
-        require(msg.sender == owner(), "Not token owner");
-
-        ++nonce;
-
-        bytes memory CLfunctionCall = abi.encodeWithSignature("sendRequest(uint64, args)", subscriptionId, args);
-
-        bool success;
-        (success, result) = to.call{value: value}(CLfunctionCall);
-
-        if(!success) {
-            assembly {
-                revert(add(result, 32), mload(result))
-            }
-        }
+    function executeFunction(uint64 sid, string[] calldata args) external payable {
+        MyBot bot = MyBot(botAddress);
+        require(msg.value >= bot.getPrice(), "Payment is lower than price.");
+        bot.sendRequest(sid, args);
     }
 
     function executeCall(
