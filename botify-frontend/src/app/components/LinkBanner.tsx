@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface Props {
     links: string[][]
@@ -9,8 +10,8 @@ const LinkBanner:React.FC<Props> = ({links}) => {
       <div className='grid grid-cols-7'>
           {links.map(l => {
                 return (
-                    <div className='flex flex-col'>
-                        <div className='h-[100%]'>
+                    <Link href="/bots" className='group flex flex-col hover:border border-neutral-700 rounded-md p-2 cursor:pointer'>
+                        <div className='h-[100%] group:hover:h-[200%]'>
                         <Image 
                             src={l[1]}
                             width={100}
@@ -21,8 +22,8 @@ const LinkBanner:React.FC<Props> = ({links}) => {
                             layout="fixed"
                         />
                         </div>
-                        <p className='text-center'>{l[0]}</p>
-                    </div>
+                        <p className='text-center group-hover:underline'>{l[0]}</p>
+                    </Link>
               )
           })}
       </div>

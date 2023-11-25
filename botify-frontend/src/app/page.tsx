@@ -1,6 +1,54 @@
+"use client"
 import Image from 'next/image'
 
 import LinkBanner from './components/LinkBanner'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { WagmiConfig, createConfig, mainnet } from 'wagmi'
+import { createPublicClient, http } from 'viem'
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import Link from 'next/link'
+
+const config = createConfig({
+  autoConnect: true,
+  publicClient: createPublicClient({
+    chain: mainnet,
+    transport: http()
+  }),
+})
+
+function Profile() {
+  const { address, isConnected } = useAccount()
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  })
+  const { disconnect } = useDisconnect()
+ 
+  if (isConnected)
+    return (
+      <div className='flex'>
+        <div>
+          <Image 
+            src="/chimp.jpg"
+            width={30}
+            height={10}
+            alt="pic"
+            className="rounded-full"
+            objectFit='contain'
+            layout="fixed"
+          />
+        </div>
+        <div className='text-mono text-sm pt-1 pl-2'>
+          {address?.slice(0,6)}
+          ...
+          {address?.slice(-4)}
+        </div>
+        <div>
+          <button onClick={() => disconnect()}></button>
+        </div>
+      </div>
+    )
+  return <button onClick={() => connect()}>Connect Wallet</button>
+}
 
 export default function Home() {
 
@@ -16,11 +64,19 @@ export default function Home() {
 
   return (
     <main className="">
-      <div className='z-10 flex p-2 absolute border border-neutral-900 left-0 font-mono bg-neutral-900 bg-opacity-50 w-[100vw]'>
-        <p className='text-xl text-white font-bold'>🦾 BOTIFY</p>
-        <div className='flex-1 relative'>
-          <div className='ml-[30%] w-[30%]'>
-            <input placeholder='Search...' className='w-[100%] border border-neutral-800 rounded text-white bg-neutral-700 bg-opacity-50' type="text"/>
+      <div className='sticky top-0 z-10 p-2 absolute border border-neutral-900 left-0 font-mono bg-neutral-900 bg-opacity-50 w-[99vw]'>
+        <div className='flex'>
+          <p className='text-xl text-white font-bold'>🦾 BOTIFY</p>
+          <div className='flex-1 relative'>
+            <div className='ml-[40%] w-[30%]'>
+              <input placeholder='Search...' className='w-[100%] border border-neutral-800 rounded text-white bg-neutral-700 bg-opacity-50' type="text"/>
+            </div>
+          </div>
+          <div className='inline-block h-8 w-8 rounded-full bg-red-600 p-1 mr-2'><p className='text-center'>NEW</p></div>
+          <div className='p-1 mr-0'>
+            <WagmiConfig config={config}>
+              <Profile />
+            </WagmiConfig>
           </div>
         </div>
       </div>
@@ -31,10 +87,12 @@ export default function Home() {
               <p className='text-3xl font-bold'>Buy and Sell Bots on the Blockchain</p>
               <p className='mt-5'>The global SaaS store</p>
               <div>
-                <button className='pl-5 pr-5 mt-5 border'>Shop now</button>
+                <Link href="/bots">
+                  <button className='pl-5 pr-5 mt-5 border hover:bg-white hover:text-black'>Shop now</button>
+                </Link>
               </div>
             </div>
-            <div className='flex-1 bg-red-50'>
+            <div className='flex-1'>
               <Image 
                   src="/bots.gif"
                   alt="pic"
@@ -45,8 +103,24 @@ export default function Home() {
             </div>
           </div>
           <h1 className='text-3xl mb-8 font-bold'>Explore Popular Categories</h1>
-          <div>
-            <LinkBanner links={links}/>
+          <LinkBanner links={links}/>
+          <div className='flex mb-20 mt-[200px]'>
+            <div className='flex-l m-auto'>
+              <Image 
+                  src="/pepe.png"
+                  alt="pic"
+                  className='rounded'
+                  width={400}
+                  height={600}
+              />
+            </div>
+            <div className='m-auto p-5'>
+              <p className='text-xl font-bold'>This project is part of the Chainlink hackathon.</p>
+              <p className='text-base'>Please use it as such, i.e. don't put your life savings into an NFT Bot.</p>
+              <div>
+                <button className='pl-5 pr-5 mt-5 border'>Explore</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
