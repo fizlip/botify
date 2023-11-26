@@ -1,39 +1,8 @@
 "use client"
 import Image from 'next/image'
 
-import LinkBanner from '../components/LinkBanner'
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import { WagmiConfig, createConfig, mainnet } from 'wagmi'
-import { createPublicClient, http } from 'viem'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { SiChainlink } from "react-icons/si";
+import BotCard from '../components/BotCard'
 import Link from 'next/link'
-import { TfiMedallAlt } from "react-icons/tfi";
-
-interface Props {
-  name:string,
-  price: number,
-  thumbnail: string,
-}
-
-const BotCard: React.FC<Props> = ({name, price, thumbnail}) => {
-  return (
-    <div className='border p-2 border-neutral-900 rounded'>
-      <Image 
-          src={thumbnail}
-          alt="pic"
-          className='rounded'
-          width={600}
-          height={600}
-      />
-      <p className='text-xl'>{name}</p>
-      <p className='font-mono text-xl font-bold pt-5 flex'>{price} LINK/request</p>
-      <p className='font-mono'>10 requests FREE</p>
-      <p className='pt-5 text-teal-500 font-bold'>352 requests made</p>
-      <p className='font-mono flex'>Owner: 0x0a99...4098 <TfiMedallAlt color="red"/></p>
-    </div>
-  )
-}
 
 export default function Home() {
 
@@ -43,11 +12,10 @@ export default function Home() {
     {name: "🔥🔥🔥 BEST Discord AI-Enabled Chat Message Moderation BOT 2024 🔥🔥🔥", price: 0.3, thumbnail: "/discchatbot.jpg"},
     {name: "GF Simulator 3.0. LEVEL UP YOUR RIZZGAME WITH THIS PERFECT GF SIM!!", price: 1.0, thumbnail: "/gf.jpg"},
     {name: "X Virality Bot. My Bot will automatically create posts on your x account and make you go VIRAL!!!", price: 5.0, thumbnail: "/x-logo.avif"},
-    {name: "", price: 0.3, thumbnail: "/discchatbot.jpg"},
+    {name: "This lil' dude will say hello to you.", price: 0.3, thumbnail: "/bman.jpg"},
     {name: "TikTok Marketing Bot, automatically create marketing material and publish it to TikTok ads.", price: 1.0, thumbnail: "/tiktok.webp"},
-    {name: "Pancakeswap Bot Buy And Sell Crypto With Just One Click 2022", price: 5.0, thumbnail: "/pan.png"},
+    {name: "Test bot, make a simple request that runs on a DON", price: 5.0, thumbnail: "/link.png"},
     {name: "🔥🔥🔥 BEST Discord AI-Enabled Chat Message Moderation BOT 2024 🔥🔥🔥", price: 0.3, thumbnail: "/discchatbot.jpg"},
-
   ]
 
   return (
