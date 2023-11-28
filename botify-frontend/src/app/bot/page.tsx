@@ -71,9 +71,42 @@ export default function Home() {
                             width={400}
                             height={600}
                         />
+                        <table className='w-[100%]'>
+                            <tbody>
+                                <tr className='border-b'>
+                                    <td>AUM</td>
+                                    <td>0.0</td>
+                                </tr>
+                                <tr className='border-b'>
+                                    <td>Investors</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr className='border-b'>
+                                    <td>Sharpe</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr className='border-b'>
+                                    <td>Change (d/w/m)</td>
+                                    <td>0%/0%/0%</td>
+                                </tr>
+                                <tr className='border-b'>
+                                    <td>Portfolio</td>
+                                    <td>
+                                        <select className='bg-black w-[100%] hover:bg-white hover:text-black'>
+                                            <option>ETH 1.2</option>
+                                            <option>BNB 2002</option>
+                                            <option>BTC 20</option>
+                                            <option>LINK 34022</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div>
-                        <p className='text-4xl font-bold'>Test bot</p>
+                        <p className='text-4xl font-bold'>🐬 DELPHI: A delta neutral trading bot which min/maxes risk/return</p>
+                        <p className='font-mono'>--------------------------------------------------------------</p>
+                        <p className='text-base font-mono pt-5 text-neutral-300'>With a proven track record and wealth of experience in the crypto markets, we have made Delphi into something unrivalled by any other bot on this site.</p>
                         <div className='pt-10'>
                             <form onSubmit={(e) => {
                                 e.preventDefault();

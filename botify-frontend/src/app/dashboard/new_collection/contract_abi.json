@@ -22,9 +22,14 @@
 				"type": "uint256"
 			},
 			{
-				"internalType": "uint64",
-				"name": "_subscriptionId",
-				"type": "uint64"
+				"internalType": "string",
+				"name": "tokenName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "short",
+				"type": "string"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -572,19 +577,6 @@
 			}
 		],
 		"name": "setApprovalForAll",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint64",
-				"name": "_subscriptionId",
-				"type": "uint64"
-			}
-		],
-		"name": "setSubscriptionId",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

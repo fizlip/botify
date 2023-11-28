@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@wagmi/core": "^1.4.7",
+    "ethers": "^6.9.0",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",

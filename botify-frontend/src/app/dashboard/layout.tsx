@@ -4,30 +4,26 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../globals.css'
-import { configureChains, useAccount, useConnect, useDisconnect } from 'wagmi'
-import { WagmiConfig, createConfig, mainnet} from 'wagmi'
-import { polygonMumbai } from 'wagmi/chains'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { WagmiConfig, createConfig, mainnet } from 'wagmi'
 import { createPublicClient, http } from 'viem'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import Link from 'next/link'
-import { publicProvider } from '@wagmi/core/providers/public'
-import { infuraProvider } from 'wagmi/providers/infura'
-import { FaRobot, FaTachometerAlt } from 'react-icons/fa'
-
-const { chains, publicClient } = configureChains(
-  [polygonMumbai],
-  [infuraProvider({ apiKey: '01797887c8e74a4d93a0fd25c15b0b56' })],
-)
+import { FaTachometerAlt } from "react-icons/fa";
+import { FaRobot } from "react-icons/fa";
 
 const config = createConfig({
-  connectors: [new InjectedConnector({chains})],
-  publicClient
+  autoConnect: true,
+  publicClient: createPublicClient({
+    chain: mainnet,
+    transport: http()
+  }),
 })
 
 function Profile() {
   const { address, isConnected } = useAccount()
   const { connect } = useConnect({
-    connector: new InjectedConnector({chains}),
+    connector: new InjectedConnector(),
   })
   const { disconnect } = useDisconnect()
  
@@ -85,11 +81,11 @@ const RootLayout: React.FC<Props> = ({children}) => {
           </div>
         </div>
       </div>
-        <div className=''>
-            <WagmiConfig config={config}>
-                {children}
-            </WagmiConfig>
-        </div>
+      <div className=''>
+          <WagmiConfig config={config}>
+            {children}
+          </WagmiConfig>
+      </div>
       </body>
     </html>
   )

@@ -9,6 +9,8 @@ import { WagmiConfig, createConfig, mainnet } from 'wagmi'
 import { createPublicClient, http } from 'viem'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import Link from 'next/link'
+import { FaTachometerAlt } from "react-icons/fa";
+import { FaRobot } from "react-icons/fa";
 
 const config = createConfig({
   autoConnect: true,
@@ -70,7 +72,8 @@ const RootLayout: React.FC<Props> = ({children}) => {
               <input placeholder='Search...' className='w-[100%] border border-neutral-800 rounded text-white bg-neutral-700 bg-opacity-50' type="text"/>
             </div>
           </div>
-          <div className='inline-block h-8 w-8 rounded-full bg-red-600 p-1 mr-2'><p className='text-center'>NEW</p></div>
+          <div className='inline-block h-8 w-8 rounded-full bg-blue-600 p-2 mr-2'><Link href="/bots" className='text-center'><FaRobot/></Link></div>
+          <div className='inline-block h-8 w-8 rounded-full bg-pink-600 p-2 mr-2'><Link href="/dashboard" className='text-center'><FaTachometerAlt /></Link></div>
           <div className='p-1 mr-0'>
             <WagmiConfig config={config}>
               <Profile />
