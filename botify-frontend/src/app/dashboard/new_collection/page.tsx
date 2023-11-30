@@ -16,17 +16,6 @@ import { useEthersProvider } from './provider';
 import { useEffect, useState } from 'react';
 
 import { useWaitForTransaction } from 'wagmi'
- 
-const WaitForConfirmation = () => {
-  const { data, isError, isLoading } = useWaitForTransaction({
-    hash: "0xb6cd2161acbfd635885bb5ad6bbcd173d99de6bfcccf2459626928ef69e4e3d6",
-    chainId: 80001,
-  })
- 
-  if (isLoading) return <div>Processing…</div>
-  if (isError) return <div>Transaction error</div>
-  return <div>Transaction: {JSON.stringify(data)}</div>
-}
 
 export default function Home() {
 
@@ -61,10 +50,17 @@ export default function Home() {
       ticker
     );
 
-    console.log("CONTRACT: ", contract)
-
     const add = await contract.getAddress();
     setCreatedContract(add);
+
+    // Store in localStorage
+    var colls = [add];
+    const storage = localStorage.getItem("collections");
+    if(storage) {
+      colls = JSON.parse(storage);
+    }
+
+    localStorage.setItem("collections", JSON.stringify(colls));
 
   }
 
@@ -125,8 +121,11 @@ export default function Home() {
                   <button className='border border-b border-blue-600 bg-blue-500 pr-5 pl-5 p-1 hover:bg-blue-600' onClick={(e) => {e.preventDefault();deployCollection()}}>Deploy Contract</button>
                 </div>
               </form>
-              <div>Finished contract: {createdContract} </div>
-              <WaitForConfirmation />
+              {createdContract ?
+              <p className='text-xl pt-6'>Your collection is being deployed at the address <b>{createdContract}</b>. It will be available shortly.</p>
+              : 
+              ""
+              }
           </div>
         </div>
       </div>

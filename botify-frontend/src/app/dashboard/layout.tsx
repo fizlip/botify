@@ -11,11 +11,12 @@ import { InjectedConnector } from 'wagmi/connectors/injected'
 import Link from 'next/link'
 import { FaTachometerAlt } from "react-icons/fa";
 import { FaRobot } from "react-icons/fa";
+import { polygonMumbai } from 'viem/chains'
 
 const config = createConfig({
   autoConnect: true,
   publicClient: createPublicClient({
-    chain: mainnet,
+    chain: polygonMumbai,
     transport: http()
   }),
 })

@@ -124,6 +124,9 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className='mt-[100%]'>
+            <p>I'm in the arena trying stuff. Some will work, some won't. But always learning. </p>
+          </div>
         </div>
       </div>
     </main>

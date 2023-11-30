@@ -3,8 +3,53 @@ import Image from 'next/image'
 
 import BotCard from '../components/BotCard'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useContractRead, useWalletClient } from 'wagmi'
+
+import abi from "./new_collection/contract_abi.json";
+
+interface Props {
+  address: string
+}
+
+const Collection: React.FC<Props> = ({address}) => {
+  const [name, setName] = useState("");
+  const { data, isError, isLoading } = useContractRead({
+    address: "0x36AC2bf098a79E65A1204d366cDDaA3f3f9aBCc0",
+    abi:abi, 
+    functionName: 'name',
+    chainId: 80001,
+    onSuccess(data) {
+      setName(String(data));
+    },
+    onError(error) {
+      console.log('DEBUG ERROR', error)
+    },
+  })
+
+  useEffect(()  => {
+  },[data])
+
+  return (
+    <tr className='border-b border-neutral-500 hover:border-white'>
+      <td><Link href="/dashboard/collection/0x36AC2bf098a79E65A1204d366cDDaA3f3f9aBCc0" className='text-teal-300 underline'>{name}</Link></td>
+      <td>15</td>
+      <td>0.1</td>
+      <td>{address}</td>
+    </tr>
+  )
+}
 
 export default function Home() {
+
+  const [collections, setCollections] = useState<string[]>([]);
+
+  useEffect(() => {
+    const _collections = localStorage.getItem("collections")
+    if(_collections) {
+      setCollections(JSON.parse(_collections));
+    }
+  },[])
 
   return (
     <main className="mb-10">
@@ -41,12 +86,9 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody>
-                <tr className='border-b border-neutral-500 hover:border-white'>
-                  <td><Link href="/" className='text-teal-300 underline'>Marketing</Link></td>
-                  <td>15</td>
-                  <td>0.1</td>
-                  <td>0x00000000</td>
-                </tr>
+                {collections.map(c => {
+                  return <Collection address={c}/>
+                })}
                 <tr className='border-b border-neutral-500 hover:border-white'>
                   <td><Link href="/" className='text-teal-300 underline'>Cool Traders</Link></td>
                   <td>15</td>
