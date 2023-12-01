@@ -15,7 +15,7 @@ interface Props {
 const Collection: React.FC<Props> = ({address}) => {
   const [name, setName] = useState("");
   const { data, isError, isLoading } = useContractRead({
-    address: "0x36AC2bf098a79E65A1204d366cDDaA3f3f9aBCc0",
+    address: address as `0x${string}`,
     abi:abi, 
     functionName: 'name',
     chainId: 80001,
@@ -32,7 +32,7 @@ const Collection: React.FC<Props> = ({address}) => {
 
   return (
     <tr className='border-b border-neutral-500 hover:border-white'>
-      <td><Link href="/dashboard/collection/0x36AC2bf098a79E65A1204d366cDDaA3f3f9aBCc0" className='text-teal-300 underline'>{name}</Link></td>
+      <td><Link href={`/dashboard/collection/${address}`} className='text-teal-300 underline'>{name}</Link></td>
       <td>15</td>
       <td>0.1</td>
       <td>{address}</td>
@@ -86,21 +86,9 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody>
-                {collections.map(c => {
+                {collections.reverse().map(c => {
                   return <Collection address={c}/>
                 })}
-                <tr className='border-b border-neutral-500 hover:border-white'>
-                  <td><Link href="/" className='text-teal-300 underline'>Cool Traders</Link></td>
-                  <td>15</td>
-                  <td>0.1</td>
-                  <td>0x00000000</td>
-                </tr>
-                <tr className='border-b border-neutral-500 hover:border-white'>
-                  <td><Link href="/" className='text-teal-300 underline'>Agents</Link></td>
-                  <td>15</td>
-                  <td>0.1</td>
-                  <td>0x00000000</td>
-                </tr>
               </tbody>
             </table>
           </div>

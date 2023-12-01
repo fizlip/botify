@@ -21,7 +21,6 @@ export default function Home() {
 
   const { address, isConnected } = useAccount()
   const signer = useEthersSigner();
-  const provider = useEthersProvider()
 
   const [initialOwner, setInitialOwner] = useState(address);
   const [implementation, setImplementation] = useState("0x83d3B89584a542b833C982B52cB2FB812FBa1852");
@@ -29,11 +28,6 @@ export default function Home() {
   const [maxSupply, setMaxSupply] = useState("");
   const [tokenName, setTokenName] = useState("");
   const [ticker, setTicker] = useState("");
-  const [chainId, setChainId] = useState(0);
-
-  const txx:`0x${string}` = "0xb6cd2161acbfd635885bb5ad6bbcd173d99de6bfcccf2459626928ef69e4e3d6"; 
-
-  const [submitted, setSubmitted] = useState(false);
 
   const [createdContract, setCreatedContract] = useState("");
 
@@ -58,6 +52,7 @@ export default function Home() {
     const storage = localStorage.getItem("collections");
     if(storage) {
       colls = JSON.parse(storage);
+      colls.push(add);
     }
 
     localStorage.setItem("collections", JSON.stringify(colls));

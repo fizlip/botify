@@ -11,9 +11,11 @@ import { useContractReads } from 'wagmi';
 
 import abi_multicall from "../../new_collection/contract_abi.json";
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Home({ params }: { params: { slug: string } }) {
     const pathname = usePathname();
+    const address = pathname.split("/")[3]
     const abi_n : any[] = abi_multicall;
 
     const [totalSupply, setTotalSupply] = useState("");
@@ -23,17 +25,17 @@ export default function Home({ params }: { params: { slug: string } }) {
     const { data, isError, isLoading } = useContractReads({
       contracts: [
         {
-          address: "0x36AC2bf098a79E65A1204d366cDDaA3f3f9aBCc0",
+          address: address as `0x${string}`,
           abi: abi_n,
           functionName: "totalSupply",
         },
         {
-          address: "0x36AC2bf098a79E65A1204d366cDDaA3f3f9aBCc0",
+          address: address as `0x${string}`,
           abi: abi_n,
           functionName: "maxSupply",
         },
         {
-          address: "0x36AC2bf098a79E65A1204d366cDDaA3f3f9aBCc0",
+          address: address as `0x${string}`,
           abi: abi_n,
           functionName: "chainId",
         },
@@ -44,6 +46,10 @@ export default function Home({ params }: { params: { slug: string } }) {
         setChainId(String(data[2].result));
       }
     })
+
+    useEffect(() => {
+      
+    }, [totalSupply])
 
     const cards = [
       {name: "🐬 DELPHI: A delta neutral trading bot which min/maxes risk/return ", price: 1.0, thumbnail: "/bman.webp"},
@@ -68,9 +74,9 @@ export default function Home({ params }: { params: { slug: string } }) {
             </div>
           </div>
           <div className='grid grid-cols-3 gap-10'>
-            {cards.map(card => {
-              return <BotDescription name={card.name} price={card.price} thumbnail={card.thumbnail}/>
-            })}
+            {parseInt(totalSupply) > 0 ? Array.from(Array(parseInt(totalSupply)).keys()).map(id => {
+              return <BotDescription tokenId={id} collectionAddress={pathname.split("/")[3] as `0x${string}`}/>
+            }): <></>}
           </div>
         </div>
       </div>

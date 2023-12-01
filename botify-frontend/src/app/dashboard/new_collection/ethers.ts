@@ -6,8 +6,7 @@ export function walletClientToSigner(walletClient: WalletClient) {
   const { account, chain, transport } = walletClient
   const network = {
     chainId: 80001,
-    name: chain.name,
-    ensAddress: chain.contracts?.ensRegistry?.address,
+    name: "mumbai",
   }
   const provider = new BrowserProvider(transport, network)
   const signer = new JsonRpcSigner(provider, account.address)

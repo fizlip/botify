@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@helia/unixfs": "^1.4.2",
     "@wagmi/core": "^1.4.7",
+    "axios": "^1.6.2",
     "ethers": "^6.9.0",
     "helia": "^2.1.0",
     "next": "14.0.3",
