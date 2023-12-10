@@ -40,20 +40,6 @@ const initRequest = async (handleResponse: (s:any) => void) => {
     const resA = await model.call("You will be styling html tags. I will give you some html tags and styling requests. I want you to answer all the prompts after this one with html responding to the prompts as best as you can. You should only cange the 'style' attribute nothing else.")
 }
 
-const handleRequest = async (handleResponse: (s:any) => void, prompt: string) => {
-    const model = new OpenAI({
-        openAIApiKey: "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", 
-        temperature: 0.9,
-        streaming: true,
-        callbacks: [{
-            handleLLMNewToken(token: string) {
-                handleResponse(token);
-            }
-        }]
-    })
-    return await model.call(prompt)
-}
-
 export default function Home() {
 
     const pathname = usePathname();
