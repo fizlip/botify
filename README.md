@@ -1,7 +1,7 @@
 # Botify.
 
 Botify is a bot marketplace that connects developers and users. It uses 
-the new IERC6551 ethereum contract which allows us to create NFTs that
+the new [ERC6551 NFT Bound accounts](https://eips.ethereum.org/EIPS/eip-6551) which allows us to create NFTs that
 acts as contracts which can own assets on the blockchain. We combine this 
 feature with chainlink functions to create NFT tokens that can execute
 software in exchange for tokens. 
