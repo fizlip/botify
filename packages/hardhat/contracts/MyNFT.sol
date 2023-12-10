@@ -4,6 +4,7 @@ pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+import {Base64} from "base64-sol/base64.sol";
 import {MyBot} from "./MyBot.sol";
 import {ERC6551Account} from "./ERC6551Account.sol";
 import {ERC6551Registry} from "./ERC6551Registry.sol";
@@ -66,5 +67,16 @@ contract MyNFT is ERC721, Ownable {
     function executeFunction(uint tokenId, string[] calldata args) external payable{
         ERC6551Account acc = ERC6551Account(payable(getAccount(tokenId)));
         acc.executeFunction(subscriptionId, args);
+    }
+
+    function tokenURI(
+        uint256 tokenId
+    ) public view virtual override returns (string memory) {
+        _requireMinted(tokenId);
+        string[] memory uriParts = new string[](4);
+
+        string memory uri = string.concat(uriParts[0], Base64.encode(abi.encodePacked(uriParts[1], uriParts[2], uriParts[3])));
+
+        return uri;
     }
 }
