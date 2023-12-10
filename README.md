@@ -22,7 +22,7 @@ and fast way to onboard new users into web3!
 * ✨ **Easy to use:** As a user everything you have everything you need in one UI. As a developer/vendor the 
 UI does alot of the deployment for you.
 * ⛓️ **Client side encryption**: The website doesn't store any secrets in a centralised database.
-* *💸 *User defined pricing:** Users pay a fee defined by the vendor, if this is to high 
+* *💸 **User defined pricing:** Users pay a fee defined by the vendor, if this is to high 
 another vendor will create a cheaper product where the users will then go. This 
 competition leads to an effective market.
 * 📖 **Open**: As a p2p marketplace the UI is just there to make things simpler, any user can
