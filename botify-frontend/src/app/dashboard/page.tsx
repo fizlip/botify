@@ -33,8 +33,6 @@ const Collection: React.FC<Props> = ({address}) => {
   return (
     <tr className='border-b border-neutral-500 hover:border-white'>
       <td><Link href={`/dashboard/collection/${address}`} className='text-teal-300 underline'>{name}</Link></td>
-      <td>15</td>
-      <td>0.1</td>
       <td>{address}</td>
     </tr>
   )
@@ -80,8 +78,6 @@ export default function Home() {
               <thead>
                 <tr className='text-left border-b border-t'>
                   <th>Name</th>
-                  <th>Count</th>
-                  <th>Floor</th>
                   <th>Address</th>
                 </tr>
               </thead>

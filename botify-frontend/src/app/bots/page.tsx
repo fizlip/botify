@@ -3,19 +3,17 @@ import Image from 'next/image'
 
 import BotCard from '../components/BotCard'
 import Link from 'next/link'
+import { useContractReads } from 'wagmi'
 
 export default function Home() {
 
+  // Shows only preselected NFTs
   const cards = [
-    {name: "🐬 DELPHI: A delta neutral trading bot which min/maxes risk/return ", price: 1.0, thumbnail: "/bman.webp"},
-    {name: "3.0.1. High volatiliy trading bot", price: 5.0, thumbnail: "/bman.avif"},
-    {name: "🔥🔥🔥 BEST Discord AI-Enabled Chat Message Moderation BOT 2024 🔥🔥🔥", price: 0.3, thumbnail: "/discchatbot.jpg"},
-    {name: "GF Simulator 3.0. LEVEL UP YOUR RIZZGAME WITH THIS PERFECT GF SIM!!", price: 1.0, thumbnail: "/gf.jpg"},
-    {name: "X Virality Bot. My Bot will automatically create posts on your x account and make you go VIRAL!!!", price: 5.0, thumbnail: "/x-logo.avif"},
-    {name: "This lil' dude will say hello to you.", price: 0.3, thumbnail: "/bman.jpg"},
-    {name: "TikTok Marketing Bot, automatically create marketing material and publish it to TikTok ads.", price: 1.0, thumbnail: "/tiktok.webp"},
-    {name: "Test bot, make a simple request that runs on a DON", price: 5.0, thumbnail: "/link.png"},
-    {name: "Liam the Marketer, Supercharge your growth without HUGE overhead", price: 0.3, thumbnail: "/marketing.webp"},
+    {tokenId: 2, collectionAddress: "0xB8933dEB494f3Fc7C46dC670bBBbeC96abB3F1FC"},
+    {tokenId: 3, collectionAddress: "0xB8933dEB494f3Fc7C46dC670bBBbeC96abB3F1FC"},
+    {tokenId: 5, collectionAddress: "0xB8933dEB494f3Fc7C46dC670bBBbeC96abB3F1FC"},
+    {tokenId: 6, collectionAddress: "0xB8933dEB494f3Fc7C46dC670bBBbeC96abB3F1FC"},
+    {tokenId: 7, collectionAddress: "0xB8933dEB494f3Fc7C46dC670bBBbeC96abB3F1FC"},
   ]
 
   return (
@@ -40,7 +38,7 @@ export default function Home() {
           </div>
           <div className='grid grid-cols-3 gap-10'>
             {cards.map(card => {
-              return <BotCard name={card.name} price={card.price} thumbnail={card.thumbnail}/>
+              return <BotCard tokenId={card.tokenId} collectionAddress={card.collectionAddress as `0x${string}`}/>
             })}
           </div>
         </div>

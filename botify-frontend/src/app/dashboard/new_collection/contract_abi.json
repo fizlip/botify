@@ -532,6 +532,11 @@
 				"internalType": "string",
 				"name": "tURI",
 				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_botAddress",
+				"type": "address"
 			}
 		],
 		"name": "safeMint",

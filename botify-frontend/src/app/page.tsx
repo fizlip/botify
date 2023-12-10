@@ -106,26 +106,59 @@ export default function Home() {
           </div>
           <h1 className='text-3xl mb-8 font-bold'>Explore Popular Categories</h1>
           <LinkBanner links={links}/>
-          <div className='flex mb-20 mt-[200px]'>
-            <div className='flex-l m-auto'>
+          <div className='flex mt-[200px]'>
+            <div className='m-auto'>
               <Image 
-                  src="/pepe.png"
+                  src="/micro.gif"
                   alt="pic"
                   className='rounded'
                   width={400}
                   height={600}
               />
             </div>
-            <div className='m-auto p-5'>
-              <p className='text-xl font-bold'>This project is part of the Chainlink hackathon.</p>
-              <p className='text-base'>Please use it as such, i.e. don't put your life savings into an NFT Bot.</p>
-              <div>
-                <button className='pl-5 pr-5 mt-5 border'>Explore</button>
-              </div>
+            <div className='m-auto p-5 w-[50%]'>
+              <p className='text-xl'>Create a micro-SaaS in minutes.</p>
+              <button className='pl-5 pr-5 border'>Start here</button>
+            </div>
+          </div>
+          <div className='flex mt-[25%]'>
+            <div className='m-auto'>
+              <Image 
+                  src="/buman.jpg"
+                  alt="pic"
+                  className='rounded'
+                  width={400}
+                  height={600}
+              />
+            </div>
+            <div className='m-auto w-[50%] p-5'>
+              <p className='text-xl'>Join the p2p marketplace (or the arena as we call it around here) and see how you compare with others.</p>
+            </div>
+          </div>
+          <div className='flex mt-[25%]'>
+            <div className='m-auto'>
+              <p className='text-md'>{"-----------------------------------------------------------"}</p>
+              <p className='text-md'>{"// .tsx"}</p>
+              <p className='text-md text-teal-300'>{"<Botify botAddress='${BOT_ADDRESS}' />"}</p>
+              <p className='text-md'>{"-----------------------------------------------------------"}</p>
+              <p className='text-md'>{"// .js"}</p>
+              <p className='text-md text-teal-300'>{"await fetch('https://botify.api/bots/${BOT_ADDRESS}')"}</p>
+              <p className='text-md'>{"-----------------------------------------------------------"}</p>
+              <p className='text-md'>{"// .py"}</p>
+              <p className='text-md text-teal-300'>{"requests.get('https://botify.api/bots/BOT_ADDRESS')"}</p>
+              <p className='text-md'>{"-----------------------------------------------------------"}</p>
+              <p className='text-md'>{"// .sol"}</p>
+              <p className='text-md text-teal-300'>{"IERC6551Account bot = IERC6551Account(BOT_ADDRESS)"}</p>
+              <p className='text-md text-teal-300'>{"bot.executeFunction{value: PRICE}(args)"}</p>
+              <p className='text-md'>{"-----------------------------------------------------------"}</p>
+
+            </div>
+            <div className='m-auto w-[50%] p-5'>
+              <p className='text-xl'>Let others embed your micro-SaaS into websites, smart contracts, Discord bots and other third parties to get passive income!</p>
             </div>
           </div>
           <div className='mt-[100%]'>
-            <p>I'm in the arena trying stuff. Some will work, some won't. But always learning. </p>
+            <p>"I'm in the arena trying stuff. Some will work, some won't. But always learning."  -- Chamath Palihapitiya</p>
           </div>
         </div>
       </div>

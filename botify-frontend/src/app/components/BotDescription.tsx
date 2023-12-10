@@ -1,7 +1,5 @@
 import Link from "next/link"
-import Image from 'next/image'
-import { TfiMedallAlt } from "react-icons/tfi"
-import { useContractRead, useContractReads} from "wagmi"
+import { useContractReads} from "wagmi"
 
 import abi from "../dashboard/new_collection/contract_abi.json";
 import axios from "axios";
@@ -49,6 +47,7 @@ const BotDescription: React.FC<Props> = ({tokenId, collectionAddress}) => {
       }
     ],
     onSuccess(data) {
+      console.log("DEBUG", data)
       const tokenURI = data[0].result;
       if(tokenURI) {
         getMetaData(String(tokenURI));
@@ -75,7 +74,7 @@ const BotDescription: React.FC<Props> = ({tokenId, collectionAddress}) => {
   }
 
   return (
-    <Link href="/bot">
+    <Link href={`/bot/${collectionAddress}/${tokenId}`}>
       <div className='border p-2 border-neutral-900 rounded hover:border-teal-700 cursor-pointer'>
         <img src={image} alt="img"/>
         <p className="text-2xl">{title}</p>

@@ -14,20 +14,18 @@ import { publicProvider } from '@wagmi/core/providers/public'
 import { infuraProvider } from 'wagmi/providers/infura'
 import { FaRobot, FaTachometerAlt } from 'react-icons/fa'
 
-const { chains, publicClient } = configureChains(
-  [polygonMumbai],
-  [infuraProvider({ apiKey: '01797887c8e74a4d93a0fd25c15b0b56' })],
-)
-
 const config = createConfig({
-  connectors: [new InjectedConnector({chains})],
-  publicClient
+  autoConnect: true,
+  publicClient: createPublicClient({
+    chain: polygonMumbai,
+    transport: http()
+  }),
 })
 
 function Profile() {
   const { address, isConnected } = useAccount()
   const { connect } = useConnect({
-    connector: new InjectedConnector({chains}),
+    connector: new InjectedConnector(),
   })
   const { disconnect } = useDisconnect()
  
