@@ -15,7 +15,7 @@ import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/dev/v1_0
  * @notice This is an example contract to show how to make HTTP requests using Chainlink
  * @dev This contract uses hardcoded values and should not be used in production.
  */
-contract MyBot is FunctionsClient, ConfirmedOwner {
+contract NewsBot is FunctionsClient, ConfirmedOwner {
     using FunctionsRequest for FunctionsRequest.Request;
 
     // State variables to store the last request ID, response, and error
@@ -46,15 +46,12 @@ contract MyBot is FunctionsClient, ConfirmedOwner {
     // Fetch character name from the Star Wars API.
     // Documentation: https://swapi.dev/documentation#people
     string source =
-        "const characterId = args[0];"
-        "const apiResponse = await Functions.makeHttpRequest({"
-        "url: `https://swapi.dev/api/people/${characterId}/`"
+        "if (!secrets.apiKey) {throw Error('API_KEY environment variable not set for CoinMarketCap API.  Get a free key from https://coinmarketcap.com/api/')}"
+        "const newsApiResponse = await Functions.makeHttpRequest({"
+        "url: `https://newsapi.org/v2/top-headlines?q=${args[0]}&from=${args[1]}`,"
+        "headers: { 'X-API-KEY': secrets.apiKey }"
         "});"
-        "if (apiResponse.error) {"
-        "throw Error('Request failed');"
-        "}"
-        "const { data } = apiResponse;"
-        "return Functions.encodeString(data.name);";
+        "return Functions.encodeString(newsApiResponse.data.articles[0].title);";
 
     //Callback gas limit
     uint32 gasLimit = 300000;
@@ -84,10 +81,10 @@ contract MyBot is FunctionsClient, ConfirmedOwner {
         uint64 subscriptionId
     ) external returns (bytes32 requestId) {
         FunctionsRequest.Request memory req;
-        req.initializeRequestForInlineJavaScript(source); // Initialize the request with JS code
-        if (args.length > 0) req.setArgs(args); // Set the arguments for the request
-
-        // Send the request and store the request ID
+        req.initializeRequestForInlineJavaScript(source);
+        if (encryptedSecretsUrls.length > 0)
+            req.addSecretsReference(encryptedSecretsUrls);
+        if (args.length > 0) req.setArgs(args);
         s_lastRequestId = _sendRequest(
             req.encodeCBOR(),
             subscriptionId,
